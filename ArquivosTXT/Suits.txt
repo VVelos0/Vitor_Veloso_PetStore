@@ -1,0 +1,57 @@
+1. User
+Cadastro de Utilizador Válido:
+Verificar se um novo utilizador pode ser cadastrado com dados válidos.
+Entrada: Nome: "João", E-mail: "joao@email.com", Senha: "senha123", etc.
+Resultado Esperado: Resposta 200 Created, confirmação do utilizador.
+Cadastro de Utilizador Inválido:
+Testar se a API bloqueia o cadastro de um utilizador com dados incompletos ou inválidos.
+Entrada: Nome: "Maria", E-mail: "maria.com",etc.
+Resultado Esperado: Resposta 400 Bad Request, mensagem "Dados inválidos".
+Login com Credenciais Válidas:
+Confirmar que o utilizador pode autenticar-se com as credenciais corretas.
+Entrada: Nome Usuário: "João Teste", Senha: "senha123".
+Resultado Esperado: Resposta 200 OK, retorno de um token de autenticação.
+Login com Credenciais Inválidas:
+Testar login com um e-mail ou senha incorretos.
+Entrada: Nome Usuário: "User Inválido", Senha: "errada".
+Resultado Esperado: Resposta 401 Unauthorized, mensagem "Credenciais inválidas".
+Exclusão de Utilizador:
+Verificar se é possível excluir um utilizador existente.
+Entrada: Nome Usuário:.....
+Resultado Esperado: Resposta 200 OK, mensagem "Utilizador excluído".
+ 
+2. Animal de Estimação
+Cadastro de Animal de Estimação:
+Confirmar que é possível adicionar um novo animal com dados válidos.
+Entrada: Nome: "Rex", Categoria: "Cão", Status: "Disponível".
+Resultado Esperado: Resposta 201 Created, retorno do ID do animal.
+Consulta de Animais Disponíveis:
+Garantir que a listagem de animais no status "disponível" retorna os dados corretos.
+Entrada: Requisição GET com filtro status = "disponível".
+Resultado Esperado: Resposta 200 OK, lista de animais disponíveis.
+Atualização de Animal:
+Testar se é possível atualizar os dados de um animal existente.
+Entrada: ID do Animal, Dados Atualizados: Status = "Vendido".
+Resultado Esperado: Resposta 200 OK, mensagem "Animal atualizado".
+Exclusão de Animal:
+Verificar se é possível excluir um animal de estimação existente.
+Entrada: ID do Animal.
+Resultado Esperado: Resposta 200 OK, mensagem "Animal excluído".
+ 
+3. Loja
+Criação de Pedido de Compra:
+Verificar se é possível criar um pedido com itens válidos.
+Entrada: ID do Animal: "12345", Quantidade: "1", Status: "Aprovado".
+Resultado Esperado: Resposta 200 OK, confirmação do pedido com ID.
+Consulta de Pedidos por Status:
+Confirmar que é possível listar pedidos filtrados por status (ex.: aprovado).
+Entrada: Status: "Aprovado".
+Resultado Esperado: Resposta 200 OK, lista de pedidos aprovados.
+Atualização de Pedido:
+Testar se o status de um pedido existente pode ser alterado.
+Entrada: ID do Pedido, Dados Atualizados: Status = "Entregue".
+Resultado Esperado: Resposta 200 OK, mensagem "Pedido atualizado".
+Exclusão de Pedido:
+Garantir que um pedido existente pode ser excluído.
+Entrada: ID do Pedido.
+Resultado Esperado: Resposta 200 OK, mensagem "Pedido excluído".

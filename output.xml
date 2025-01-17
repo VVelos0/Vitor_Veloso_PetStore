@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-01-16T23:08:25.116589" rpa="false" schemaversion="5">
+<suite id="s1" name="Caso De Teste" source="c:\Users\vitor.alcantara\Desktop\PetStore\ArquivosLogin\Caso_De_Teste.robot">
+<test id="s1-t1" name="caso de cenario 02: Validar POST" line="21">
+<kw name="Criar novo usuario" owner="login">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-01-16T23:08:25.687991" level="INFO">${string} = gMmR</msg>
+<var>${string}</var>
+<arg>length=4</arg>
+<arg>chars=[LETTERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-01-16T23:08:25.687592" elapsed="0.000984"/>
+</kw>
+<kw name="Convert To Lower Case" owner="String">
+<msg time="2025-01-16T23:08:25.689096" level="INFO">${string} = gmmr</msg>
+<var>${string}</var>
+<arg>${string}</arg>
+<doc>Converts string to lower case.</doc>
+<status status="PASS" start="2025-01-16T23:08:25.688824" elapsed="0.000403"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-01-16T23:08:25.689766" level="INFO">${nome_de_usuario} = gmmrstring</msg>
+<arg>${nome_de_usuario}</arg>
+<arg>${string}string</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-01-16T23:08:25.689429" elapsed="0.000478"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-01-16T23:08:25.690275" level="INFO">gmmrstring</msg>
+<arg>${nome_de_usuario}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-01-16T23:08:25.690076" elapsed="0.000375"/>
+</kw>
+<status status="PASS" start="2025-01-16T23:08:25.686845" elapsed="0.003759"/>
+</kw>
+<kw name="POST Endpoint /usuarios" owner="login">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-16T23:08:25.691936" level="INFO">&amp;{payload} = { nome=string | email=string | password=string }</msg>
+<var>&amp;{payload}</var>
+<arg>nome=string</arg>
+<arg>email=string</arg>
+<arg>password=string</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-16T23:08:25.691539" elapsed="0.000530"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-16T23:08:25.692606" level="FAIL">Non-existing index or alias 'petstore'.</msg>
+<var>${resposta}</var>
+<arg>petstore</arg>
+<arg>/usuarios</arg>
+<arg>data=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-01-16T23:08:25.692275" elapsed="0.007060">Non-existing index or alias 'petstore'.</status>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>resposta: ${resposta.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-01-16T23:08:25.699693" elapsed="0.000114"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${resposta}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-01-16T23:08:25.699986" elapsed="0.000089"/>
+</kw>
+<status status="FAIL" start="2025-01-16T23:08:25.691120" elapsed="0.009121">Non-existing index or alias 'petstore'.</status>
+</kw>
+<kw name="Validar Status Code &quot;200&quot;" owner="login">
+<status status="NOT RUN" start="2025-01-16T23:08:25.700728" elapsed="0.000120"/>
+</kw>
+<status status="FAIL" start="2025-01-16T23:08:25.685873" elapsed="0.015520">Non-existing index or alias 'petstore'.</status>
+</test>
+<status status="FAIL" start="2025-01-16T23:08:25.123116" elapsed="0.579965"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Caso De Teste">Caso De Teste</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-01-16T23:08:25.682152" level="ERROR">Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore\ArquivosLogin\login.robot' on line 6: Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore\ArquivosLogin\Caso_De_Teste.robot' on line 14: Resource file with 'Test Cases' section is invalid.</msg>
+</errors>
+</robot>
