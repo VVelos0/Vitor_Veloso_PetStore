@@ -6,28 +6,38 @@ Library        Collections
 Resource      ../ArquivosLogin/login.robot
 
 *** Variables ***
-${SERVER_URL}                 petstore
+${BASE_URL}                   https://petstore.swagger.io
+${ENDPOINT}                    /users
 
 
 
 
 *** Test Cases ***
 
-caso de cenario 01: Validar GET
+caso de cenario 01: Validar GET usuario
     Criar novo usuario
-    Get Endpoint /usuarios
-    Validar Status Code "200"
+    Get User /usuarios
+    Validar Status Code 
 
-caso de cenario 02: Validar POST
-  Criar novo usuario
-   POST Endpoint /usuarios
-   Validar Status Code "200"
+caso de cenario 02: Validar POST usuario
+    Criar sessão na petstore
+     POST User /usuarios
+    Validar Status Code
 
 
-caso de cenario 03: Validar DELETE
-    Criar novo usuario
-    DELETE Endpoint /usuarios
-    Validar Status Code "200"    
+
+caso de cenario 03: Validar PUT usuario
+    Criar sessão na petstore
+    PUT User /usuarios
+    Validar Status Code "400"
+
+caso de cenario 04: Validar DELETE usuario
+     Criar sessão na petstore
+    DELETE User /usuarios
+    Validar Status Code "400" 
+
+
+caso de cenario 05:      
 
 
 

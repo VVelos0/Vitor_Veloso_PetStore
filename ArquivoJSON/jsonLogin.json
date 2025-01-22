@@ -1,0 +1,33 @@
+{ 
+    "login_com_sucesso":{
+    
+  "email": "QA@gmail.com",
+  "senha": "123456",
+  "nome": "QA Teste",
+  "sobrenome": "Teste",
+  "userStatus": "2",
+  "Phone": "12453634289"
+
+},
+"login_com_falha":{
+"email": "QAgmail.com",
+"senha": "",
+"nome": "",
+"sobrenome": "3333",
+
+"userStatus": "33",
+"Phone": "124536342893333333"
+},
+
+
+
+"Login_sem_informacao":{
+
+"email": "",
+"senha": "",
+"nome": "",
+"sobrenome": "",
+"userStatus": "",
+"Phone": ""
+}
+}

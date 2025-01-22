@@ -8,17 +8,23 @@ Resource      ../ArquivosLogin/Caso_De_Teste.robot
 
 
 *** Variables ***
-${password_para_login}        teste
-${nome_de_usuario}            string
-${SERVER_URL}                 petstore
-${ARQUIVO_JSON}               usuarios.json
+
+
+${BASE_URL}       https://petstore.swagger.io/v2
+${BASE_URL2}       https://petstore.swagger.io/v2
+${ARQUIVO_JSON}               users.json
+${URL}                    https://jsonplaceholder.typicode.com/posts/1
+
+
+
+
 
 
 
 
 *** Keywords ***
 Get Request Test
-      Create Session    petstore     https://petstore.swagger.io
+      Create Session    petstore     https://petstore.swagger.io/v2 
 
       ${resp_servrest}=   GET On Session  petstore  /  expected_status=200
       ${resp_json}=     GET On Session  jsonplaceholder  /posts/1
@@ -27,40 +33,119 @@ Get Request Test
       Dictionary Should Contain Value     ${resp_json.json()}  sunt aut facere repellat provident
 
 Criar novo usuario
-    ${string}    Generate Random String    length=4   chars=[LETTERS]
-    ${string}    Convert To Lower Case    ${string}   
-    Set Test Variable    ${nome_de_usuario}  ${string}string
-    Log    ${nome_de_usuario} 
+    ${random}=    Generate Random String    length=4    chars=[LETTERS]
+    ${random}=    Convert To Lower Case    ${random}
+    Set Test Variable    ${nome_de_usuario}    ${random}paulo_ferreira
+    Log    Nome de usuário gerado: ${nome_de_usuario}
 
-
-Get Endpoint /usuarios
-        Create Session    petstore        https://petstore.swagger.io
-        ${resposta}=    GET On Session       petstore       /usuarios   
+Get User /usuarios
+        Create Session    petstore           ${BASE_URL}
+        ${resposta}=    GET On Session       petstore        ${BASE_URL}      
+        Should Be Equal As Strings    ${resposta.status_code}    200
+        Log To Console    Resposta: ${resposta.text}   
         Set Global Variable    ${resposta}
 
 
 
 
-POST Endpoint /usuarios
-        &{payload}  Create Dictionary        nome=string      email=string   password=string   
-        ${resposta}    POST On Session       petstore     /usuarios    data=${payload}
-        Log To Console        resposta: ${resposta.content}    
-        Set Global Variable      ${resposta}
-            
+POST User /usuarios
+    ${payload}=      Create Dictionary   
+    ...           id=4
+    ...           username=Hype
+    ...           firstName=Juninho
+    ...           lastName=Silva
+    ...           email=showwww@gmail.com
+    ...           password=show123
+    ...           phone=2122223754    
+    ...           userStatus=0
+  
+    
+         Create Session    petstore    ${BASE_URL2}
+        ${resposta}=      POST On Session    petstore    /user    json=${payload}
+         Log To Console        resposta: ${resposta.content}    
+         Set Global Variable      ${resposta}
 
-Criar sessão
-    Create Session        petstore        https://petstore.swagger.io
 
 
-Validar Status Code "200"       
-             Log    ${resposta.status_code}
-            Log    ${resposta.json()}
+ PUT User /usuarios
+         ${payload}=      Create Dictionary   
+    ...           id=5
+    ...           username=Hype
+    ...           firstName=Juninho
+    ...           lastName=Silva
+    ...           email=showwwwwww@gmail.com
+    ...           password=show123333
+    ...           phone=2122223754    
+    ...           userStatus=0
+  
+    
+         Create Session    petstore    ${BASE_URL2}
+        ${resposta}=      PUT On Session    petstore    /user    json=${payload}
+         Log To Console        resposta: ${resposta.content}    
+         Set Global Variable      ${resposta}
+ 
 
 
+
+ DELETE User /usuarios
+       Create Session    petstore    ${BASE_URL2}
+         ${resposta}    DELETE On Session       petstore         /user  
+         Log To Console        resposta: ${resposta.content}    
+          Set Global Variable      ${resposta}
 
     
 
 
+
+Criar sessão na petstore
+     ${headers}=    Create Dictionary    Accept=application/json    Content-Type=application/json
+    Create Session    alias=petstore    url=https://petstore.swagger.io/v2  headers=${headers}
+
+
+Validar Status Code "200"       
+             Log    ${resposta.status_code}
+             Log    ${resposta.json()}
+
+
+Validar Status Code "400"       
+             Log    ${resposta.status_code}
+             Log    ${resposta.json()}
+
+
+
+
+Validar Code "${statuscode}"    
+    ${resposta}=    Create Dictionary    status_code=200    
+
+
+Validar Code 400 "${statuscode}"    
+    ${resposta}=    Create Dictionary    status_code=400  
+
+
+
+
+
+Validar Status Code     
+              Create Session    my_session    ${URL}
+    ${resposta}       Get Request   my_session    /
+    Log               Status Code: ${resposta.status_code}
+    Should Be Equal As Numbers    ${resposta.status_code}    200
+    Log               JSON Body: ${resposta.json()}
+
+
+Validar Status Code "400"    
+              Create Session    my_session    ${URL}
+    ${resposta}       Get Request   my_session    /
+    Log               Status Code: ${resposta.status_code}
+    Should Be Equal As Numbers    ${resposta.status_code}    400
+    Log               JSON Body: ${resposta.json()}
+
+
+Validar Status Code "${StatusCode}"
+    Should Be True  ${resposta.status_code} == ${StatusCode}
+
+
+      
 
       
 

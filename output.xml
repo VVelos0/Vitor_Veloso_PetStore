@@ -1,87 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-01-16T23:08:25.116589" rpa="false" schemaversion="5">
-<suite id="s1" name="Caso De Teste" source="c:\Users\vitor.alcantara\Desktop\PetStore\ArquivosLogin\Caso_De_Teste.robot">
-<test id="s1-t1" name="caso de cenario 02: Validar POST" line="21">
-<kw name="Criar novo usuario" owner="login">
-<kw name="Generate Random String" owner="String">
-<msg time="2025-01-16T23:08:25.687991" level="INFO">${string} = gMmR</msg>
-<var>${string}</var>
-<arg>length=4</arg>
-<arg>chars=[LETTERS]</arg>
-<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2025-01-16T23:08:25.687592" elapsed="0.000984"/>
-</kw>
-<kw name="Convert To Lower Case" owner="String">
-<msg time="2025-01-16T23:08:25.689096" level="INFO">${string} = gmmr</msg>
-<var>${string}</var>
-<arg>${string}</arg>
-<doc>Converts string to lower case.</doc>
-<status status="PASS" start="2025-01-16T23:08:25.688824" elapsed="0.000403"/>
-</kw>
-<kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2025-01-16T23:08:25.689766" level="INFO">${nome_de_usuario} = gmmrstring</msg>
-<arg>${nome_de_usuario}</arg>
-<arg>${string}string</arg>
-<doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2025-01-16T23:08:25.689429" elapsed="0.000478"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-01-16T23:08:25.690275" level="INFO">gmmrstring</msg>
-<arg>${nome_de_usuario}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-01-16T23:08:25.690076" elapsed="0.000375"/>
-</kw>
-<status status="PASS" start="2025-01-16T23:08:25.686845" elapsed="0.003759"/>
-</kw>
-<kw name="POST Endpoint /usuarios" owner="login">
+<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-01-22T20:42:40.299079" rpa="false" schemaversion="5">
+<suite id="s1" name="Caso De Teste" source="c:\Users\vitor.alcantara\Desktop\PetStore1\ArquivosLogin\Caso_De_Teste.robot">
+<test id="s1-t1" name="caso de cenario 02: Validar POST usuario" line="22">
+<kw name="Criar sessão na petstore" owner="login">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-01-16T23:08:25.691936" level="INFO">&amp;{payload} = { nome=string | email=string | password=string }</msg>
-<var>&amp;{payload}</var>
-<arg>nome=string</arg>
-<arg>email=string</arg>
-<arg>password=string</arg>
+<msg time="2025-01-22T20:42:40.822755" level="INFO">${headers} = {'Accept': 'application/json', 'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-01-16T23:08:25.691539" elapsed="0.000530"/>
+<status status="PASS" start="2025-01-22T20:42:40.822291" elapsed="0.001098"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-22T20:42:40.824451" level="INFO">Creating Session using : alias=petstore, url=https://petstore.swagger.io/v2, headers={'Accept': 'application/json', 'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>alias=petstore</arg>
+<arg>url=https://petstore.swagger.io/v2</arg>
+<arg>headers=${headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-22T20:42:40.823875" elapsed="0.001043"/>
+</kw>
+<status status="PASS" start="2025-01-22T20:42:40.821484" elapsed="0.003680"/>
+</kw>
+<kw name="POST User /usuarios" owner="login">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-22T20:42:40.827052" level="INFO">${payload} = {'id': '4', 'username': 'Hype', 'firstName': 'Juninho', 'lastName': 'Silva', 'email': 'showwww@gmail.com', 'password': 'show123', 'phone': '2122223754', 'userStatus': '0'}</msg>
+<var>${payload}</var>
+<arg>id=4</arg>
+<arg>username=Hype</arg>
+<arg>firstName=Juninho</arg>
+<arg>lastName=Silva</arg>
+<arg>email=showwww@gmail.com</arg>
+<arg>password=show123</arg>
+<arg>phone=2122223754</arg>
+<arg>userStatus=0</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-22T20:42:40.826289" elapsed="0.001038"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-22T20:42:40.828623" level="INFO">Creating Session using : alias=petstore, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>petstore</arg>
+<arg>${BASE_URL2}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-22T20:42:40.828155" elapsed="0.000988"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-01-16T23:08:25.692606" level="FAIL">Non-existing index or alias 'petstore'.</msg>
+<msg time="2025-01-22T20:42:41.285065" level="INFO">POST Request : url=https://petstore.swagger.io/v2/user 
+ path_url=/v2/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '171', 'Content-Type': 'application/json'} 
+ body=b'{"id": "4", "username": "Hype", "firstName": "Juninho", "lastName": "Silva", "email": "showwww@gmail.com", "password": "show123", "phone": "2122223754", "userStatus": "0"}' 
+ </msg>
+<msg time="2025-01-22T20:42:41.285486" level="INFO">POST Response : url=https://petstore.swagger.io/v2/user 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 22 Jan 2025 23:42:41 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":200,"type":"unknown","message":"4"} 
+ </msg>
+<msg time="2025-01-22T20:42:41.285796" level="INFO">${resposta} = &lt;Response [200]&gt;</msg>
 <var>${resposta}</var>
 <arg>petstore</arg>
-<arg>/usuarios</arg>
-<arg>data=${payload}</arg>
+<arg>/user</arg>
+<arg>json=${payload}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="FAIL" start="2025-01-16T23:08:25.692275" elapsed="0.007060">Non-existing index or alias 'petstore'.</status>
+<status status="PASS" start="2025-01-22T20:42:40.829527" elapsed="0.456423"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>resposta: ${resposta.content}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="NOT RUN" start="2025-01-16T23:08:25.699693" elapsed="0.000114"/>
+<status status="PASS" start="2025-01-22T20:42:41.286308" elapsed="0.001371"/>
 </kw>
 <kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-01-22T20:42:41.288547" level="INFO">${resposta} = &lt;Response [200]&gt;</msg>
 <arg>${resposta}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="NOT RUN" start="2025-01-16T23:08:25.699986" elapsed="0.000089"/>
+<status status="PASS" start="2025-01-22T20:42:41.288081" elapsed="0.000765"/>
 </kw>
-<status status="FAIL" start="2025-01-16T23:08:25.691120" elapsed="0.009121">Non-existing index or alias 'petstore'.</status>
+<status status="PASS" start="2025-01-22T20:42:40.825741" elapsed="0.463435"/>
 </kw>
-<kw name="Validar Status Code &quot;200&quot;" owner="login">
-<status status="NOT RUN" start="2025-01-16T23:08:25.700728" elapsed="0.000120"/>
+<kw name="Validar Status Code" owner="login">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-22T20:42:41.291195" level="INFO">Creating Session using : alias=my_session, url=https://jsonplaceholder.typicode.com/posts/1, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>my_session</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-22T20:42:41.290812" elapsed="0.000792"/>
 </kw>
-<status status="FAIL" start="2025-01-16T23:08:25.685873" elapsed="0.015520">Non-existing index or alias 'petstore'.</status>
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-01-22T20:42:41.292205" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-01-22T20:42:41.595973" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/posts/1/ 
+ path_url=/posts/1/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-01-22T20:42:41.596434" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/posts/1/ 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 22 Jan 2025 23:42:41 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1737573265&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;s=uUW7Ck6S4FmClUsZwNeKXac4IOvroLIeVSo%2BG2Sj5ro%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1737573265&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;s=uUW7Ck6S4FmClUsZwNeKXac4IOvroLIeVSo%2BG2Sj5ro%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'X-Ratelimit-Limit': '1000', 'X-Ratelimit-Remaining': '999', 'X-Ratelimit-Reset': '1737573319', 'Vary': 'Origin, Accept-Encoding', 'Access-Control-Allow-Credentials': 'true', 'Cache-Control': 'max-age=43200', 'Pragma': 'no-cache', 'Expires': '-1', 'X-Content-Type-Options': 'nosniff', 'Etag': 'W/"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'HIT', 'Age': '16096', 'Server': 'cloudflare', 'CF-RAY': '906366e62efa1aad-GRU', 'Content-Encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=1148&amp;min_rtt=853&amp;rtt_var=434&amp;sent=9&amp;recv=10&amp;lost=0&amp;retrans=0&amp;sent_bytes=5213&amp;recv_bytes=874&amp;delivery_rate=6058577&amp;cwnd=256&amp;unsent_bytes=0&amp;cid=d98725d8913434c9&amp;ts=6078&amp;x=0"'} 
+ body={
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+} 
+ </msg>
+<msg time="2025-01-22T20:42:41.596842" level="INFO">${resposta} = &lt;Response [200]&gt;</msg>
+<var>${resposta}</var>
+<arg>my_session</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-01-22T20:42:41.292014" elapsed="0.305011"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-01-22T20:42:41.598698" level="INFO">Status Code: 200</msg>
+<arg>Status Code: ${resposta.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-01-22T20:42:41.597758" elapsed="0.001222"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-01-22T20:42:41.600186" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resposta.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-01-22T20:42:41.599342" elapsed="0.001142"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-01-22T20:42:41.601609" level="INFO">JSON Body: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}</msg>
+<arg>JSON Body: ${resposta.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-01-22T20:42:41.600798" elapsed="0.001058"/>
+</kw>
+<status status="PASS" start="2025-01-22T20:42:41.290150" elapsed="0.311927"/>
+</kw>
+<status status="PASS" start="2025-01-22T20:42:40.820407" elapsed="0.782639"/>
 </test>
-<status status="FAIL" start="2025-01-16T23:08:25.123116" elapsed="0.579965"/>
+<status status="PASS" start="2025-01-22T20:42:40.305167" elapsed="1.300278"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="Caso De Teste">Caso De Teste</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Caso De Teste">Caso De Teste</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-01-16T23:08:25.682152" level="ERROR">Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore\ArquivosLogin\login.robot' on line 6: Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore\ArquivosLogin\Caso_De_Teste.robot' on line 14: Resource file with 'Test Cases' section is invalid.</msg>
+<msg time="2025-01-22T20:42:40.811234" level="ERROR">Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore1\ArquivosLogin\login.robot' on line 136: Creating keyword 'Validar Status Code "400"' failed: Keyword with same name defined multiple times.</msg>
+<msg time="2025-01-22T20:42:40.817988" level="ERROR">Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore1\ArquivosLogin\login.robot' on line 6: Error in file 'c:\Users\vitor.alcantara\Desktop\PetStore1\ArquivosLogin\Caso_De_Teste.robot' on line 15: Resource file with 'Test Cases' section is invalid.</msg>
+<msg time="2025-01-22T20:42:41.292205" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
 </errors>
 </robot>
